@@ -1,0 +1,64 @@
+{% extends 'sitetemplate.html' %}
+{% block title %}
+    Home - Brand
+{% endblock %}
+{% block main %}
+    <main class="page lanidng-page">
+        <section class="portfolio-block block-intro">
+            <div class="container">
+                <div class="avatar" style="background: #569def;"></div>
+                <div class="about-me">
+                    <p>Hello! We are&nbsp;<strong>Car Help</strong>. We will help you identify the problems of your car regardless if you don't know much about cars!</p><a class="btn btn-outline-primary" role="button" href="carhelp.html">Help Me</a>
+                </div>
+            </div>
+        </section>
+        <section class="portfolio-block photography">
+            <div class="container">
+                <div class="row g-0">
+                    <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{{ url_for('static', filename='/img/1.jpg') }}" style="width: 435.004px;height: 287.996px;"></a></div>
+                    <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{{ url_for('static', filename='/img/2.jpg') }}" style="height: 288.109px;width: 431.998px;"></a></div>
+                    <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{{ url_for('static', filename='/img/3.jpg') }}" style="height: 288.368px;"></a></div>
+                </div>
+            </div>
+        </section>
+        <section class="portfolio-block call-to-action border-bottom" style="width: 1410.86px;"></section>
+        <section class="portfolio-block skills">
+            <div class="container">
+                <div class="heading">
+                    <h2>HOW CAN WE HELP YOU?</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
+                        <div class="card special-skill-item border-0">
+                            <div class="card-header bg-transparent border-0"><i class="icon ion-ios-star-outline"></i></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Expert Systems</h3>
+                                <p class="card-text">We created an expert systems that can help you identify the problem on your car and narrow down the margin on where you need to work .</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-right" data-aos-duration="450" data-aos-delay="300">
+                        <div class="card special-skill-item border-0">
+                            <div class="card-header bg-transparent border-0"><i class="icon ion-ios-lightbulb-outline"></i></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Beginner Friendly</h3>
+                                <p class="card-text">Our system targets the people with little to no knowledge about cars and its parts. It will help them understand the problem and also know how to avoid it afterwards.&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-right" data-aos-duration="300" data-aos-delay="200">
+                        <div class="card special-skill-item border-0">
+                            <div class="card-header bg-transparent border-0"><i class="icon ion-social-euro"></i></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Will save you MONEY</h3>
+                                <p class="card-text">Being a beginner,&nbsp; it is very easy for some ungrateful mechanics to use it against you and charge you a lot of things you probably don't need! With our system you'll be able to tell them where to work only!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+    
+    

@@ -1,0 +1,65 @@
+{% extends 'sitetemplate.html' %}
+{% block title %}
+    Projects - Brand
+{% endblock %}
+{% block main %}
+<main class="page projects-page">
+    <section class="portfolio-block projects-cards">
+        <div class="container">
+            <div class="heading">
+                <h2>Understand Cars</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0"><a href="https://www.youtube.com/watch?v=8YIDOjD0oBI"><img class="card-img-top scale-on-hover" alt="Card Image" style="height: 275.689px;" src="{{ url_for('static', filename='/img/engine.jpg') }}"></a>
+                        <div class="card-body">
+                            <h6><a href="#">ENGINE</a></h6>
+                            <p class="text-muted card-text">A motor designed to convert one form of energy into a mechanical energy. It creates combustion to power your vehicle and make it move.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0"><a href="https://www.youtube.com/watch?v=QPaUJfA1KsY"><img class="card-img-top scale-on-hover" alt="Card Image" src="{{ url_for('static', filename='/img/transmission.jpg') }}" style="height: 275.869px;"></a>
+                        <div class="card-body">
+                            <h6><a href="#">TRANSMISSION</a></h6>
+                            <p class="text-muted card-text">A machine that provides controlled application of power for your vehicle. It adapts the output of the internal combustion engine to drive the wheels.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0"><a href="https://www.youtube.com/watch?v=nJqt14tmrRw"><img class="card-img-top scale-on-hover" alt="Card Image" src="{{ url_for('static', filename='/img/suspension.jpg') }}" style="height: 275.869px;"></a>
+                        <div class="card-body">
+                            <h6><a href="#">SUSPENSION</a></h6>
+                            <p class="text-muted card-text">A system that allows relative motion between shock absorbers and spring through the vehicle. It supports the road holding, handling, and ride quality which are commonly at odds with each other.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0"><a href="https://www.youtube.com/watch?v=6H7nwlT_qNY"><img class="card-img-top scale-on-hover" alt="Card Image" src="{{ url_for('static', filename='/img/brakes.jpg') }}" style="height: 277.152px;"></a>
+                        <div class="card-body">
+                            <h6><a href="#">BRAKES</a></h6>
+                            <p class="text-muted card-text">A mechanical device that inhibits motion by absorbing energy from a moving vehicle. It is the one responsible for slowing and stopping your vehicle by using friction.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0"><a href="https://www.youtube.com/watch?v=Wh3jZcKVmFc"><img class="card-img-top scale-on-hover" alt="Card Image" src="{{ url_for('static', filename='/img/exhaust.jpg') }}" style="height: 277.33px;"></a>
+                        <div class="card-body">
+                            <h6><a href="#">EXHAUST</a></h6>
+                            <p class="text-muted card-text">A system that movies the burnt air-fuel mixture out of the engine. It is also responsible to clean this emission and reduce unnecessary noise generated.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0"><a href="https://www.youtube.com/watch?v=N_YXtc27gig"><img class="card-img-top scale-on-hover" alt="Card Image" src="{{ url_for('static', filename='/img/tires.png') }}" style="height: 277.33px;"></a>
+                        <div class="card-body">
+                            <h6><a href="#">TIRES</a></h6>
+                            <p class="text-muted card-text">A component that surrounds the wheel's rim to transfer a vehicle's load from the axle through the wheel to the ground and it provides the traction on the surface road.&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
