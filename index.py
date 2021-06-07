@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, jsonify
 
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = "key"
@@ -17,7 +17,11 @@ def about_us():
 
 @app.route('/carhelp')
 def car_help():
-    return render_template('carhelp.html')
+    lights = ['Oil Pressure Light', 'Engine Temperature Light', 
+              'ABS Light', 'Handbrake/Parking Brake Light', 'Traction Control Light', 
+              'Engine Warning Light', 'Battery Alert Light', 'Tire Pressure Light', 
+              'Fuel Indicator', 'Air Bag Indicator', 'Seat Belt Indicator', 'Washer Fluid Indicator']
+    return render_template('carhelp.html', lights=lights)
 
 @app.route('/understand-cars')
 def understand_cars():
