@@ -9,46 +9,118 @@
             <div class="heading">
                 <h2>Welcome to CarHelp!</h2>
             </div>
-            <form>
+            <form id="carform">
                 <div>
                     <fieldset>
                         <legend>Is your car powered by Petrol or Diesel?</legend>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio1" class="custom-control-input" name="customRadio" checked="">
-                            <label class="form-label custom-control-label" for="customRadio1">&nbsp; Petrol</label>
+                            <input type="radio" id="customRadio1" value="0" class="custom-control-input" name="pet-dies">
+                            <label class="form-label custom-control-label diesel-petrol" for="customRadio1">&nbsp; Petrol</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio2" class="custom-control-input" name="customRadio">
-                            <label class="form-label custom-control-label" for="customRadio2">&nbsp; Diesel</label>
+                            <input type="radio" id="customRadio2" value="1" class="custom-control-input" name="pet-dies">
+                            <label class="form-label custom-control-label diesel-petrol" for="customRadio2">&nbsp; Diesel</label>
                         </div>
                     </fieldset>
-                    <fieldset style="">
+                    <fieldset id="nextDiv" style="display: none">
                         <legend>Are there any warning lights on your dashboard?</legend>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline1" class="custom-control-input" name="customRadioInline" checked="">
+                            <input type="radio" id="customRadioInline1" value="0" class="" name="warning">
                             <label class="form-label custom-control-label" for="customRadioInline1">&nbsp; YES</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline2" class="custom-control-input" name="customRadioInline">
+                            <input type="radio" id="customRadioInline2" value="1" class="" name="warning">
                             <label class="form-label custom-control-label" for="customRadioInline2">&nbsp; NO</label>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>Which of these lights are you seeing on your dashboard?</legend>
-                        {% for light in lights %}
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline1" class="custom-control-input" name="customRadioInline" checked="">
-                            <label class="form-label custom-control-label" for="customRadioInline1">&nbsp; {{ light }}</label>
-                        </div>
-                        {% endfor %}
-                    </fieldset>
-                    <fieldset>
+                    <div id="lights" style="display: none">
+                        <fieldset>
+                            <legend>Which of these lights are you seeing on your dashboard?</legend>
+                            {% for light in lights %}
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" class="custom-control-input light-choice" value="{{ loop.index }}" name="lightRadio">
+                                <label class="form-label custom-control-label" for="customRadioInline1">&nbsp; {{ light }}</label>
+                            </div>
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                    <div id="problems" style="display: none">
+                        <fieldset>
+                            <legend>What can you feel/see about your car?</legend>
+                            {% for problem in problems %}
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" class="custom-control-input problem-choice" value="{{ loop.index }}" name="problemRadio">
+                                <label class="form-label custom-control-label" for="customRadioInline1">&nbsp; {{ problem }}</label>
+                            </div>
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                    <fieldset id="solution_set" style="display:none">
                         <legend>Solution:&nbsp; <span></span> </legend>
-                        <p style="background: rgb(208,238,255);padding: 10px;text-align: justify;"></p>
+                        <p style="background: rgb(208,238,255);padding: 10px;text-align: justify;" id="solution"></p>
                     </fieldset>
+                    <center>
+                        <button type="button" id="solveButton" class="btn btn-primary" style="display: none;">Solve My Problem!</button>
+                    </center>
                 </div>
             </form>
         </div>
     </section>
 </main>
 {% endblock %}
+
+{% block js %} 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("input[name='pet-dies']").click(function() {
+            $("#nextDiv").css('display', 'block');
+        });
+
+        $("input[name='warning']").click(function() {
+            var choice = $(this).val();
+            if(choice == 0) {
+                $("#lights").css('display', 'block');
+                $("#problems").css('display', 'none');
+            } else {
+                $("#lights").css('display', 'none');
+                $("#problems").css('display', 'block');
+            }
+        });
+
+        $("input[name='lightRadio']").click(function() {
+            var choice = $(this).val();
+            if(choice != 1) {
+                $("#solveButton").css('display', 'block');
+            } else {
+                $("#solveButton").css('display', 'none');
+            }
+        });
+
+        $("#carform").submit(function (e) {
+            console.log($("input[name='pet-dies']:checked").val());
+            $.ajax({
+                data: {
+                    petrol_check : $("input[name='pet-dies']:checked").val(),
+                    light_check : $("input[name='warning']:checked").val(),
+                    problem : $("input[name='lightRadio']:checked").val()
+                },
+                type: 'POST',
+                url: '/solution'
+            }).done(function(response) {
+                $("#solution_set").css('display', 'block');
+                $("#solution").text(response.solution.light_solution);
+            });
+
+            e.preventDefault();
+        })
+
+        $("#solveButton").click(function() {
+            $("#carform").submit();
+        });
+    });
+
+</script>
+
+{% endblock %}
+

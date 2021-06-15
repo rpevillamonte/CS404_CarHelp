@@ -400,73 +400,85 @@ def carProblem(prompt):
         }
         return switcher.get(prompt,'Yikes! I have not experienced that problem before.')
 
+def solution(is_petrol, light_check, exp_index, knocking_score=0):
+    global isPetrol
+    if is_petrol == 1: isPetrol = False
+    
+    if light_check == 0:
+        return {'light_solution' : warningLights(exp_index)}
+    else:
+        return {'problem_solution' : carProblem(exp_index),
+                'to_do' : carToDo(exp_index)
+                }
+    
 # q/a portion for petrol problems
 
-def ask():
-    stillHaveQuestions = True
-    print('''
-            Are there any warning lights on your dashboard?
-            [Y]es | [N]o
-            ''')
-    answer = input("Enter your choice here: ")
-    if answer.lower() == 'y':
-        while stillHaveQuestions == True:
-            showDashboardLights()
-            answer = int(input("Enter your choice here: "))
-            # show the result of the input choice
-            print(warningLights(answer))
-            print()
-            print(
-                'Do you still want to ask about the different lights in your dashboard? [Y] | [N]')
-            answer = input("Enter your choice here: ")
-            if answer.lower() == 'n':
-                stillHaveQuestions = False
-    elif answer.lower() == 'n':
-        while stillHaveQuestions == True:
-            showCarProblems()
-            answer = int(input("Enter your choice here: "))
-            print(carProblem(answer))
-            print("TO DO LIST:")
-            print(carToDo(answer))
-            print()
-            print(
-                'Does your car have other problems besides what you have just searched? [Y] | [N]')
-            answer = input("Enter your choice here: ")
-            if answer.lower() == 'n':
-                stillHaveQuestions = False
+#def ask():
+#    stillHaveQuestions = True
+#    print('''
+#            Are there any warning lights on your dashboard?
+#            [Y]es | [N]o
+#            ''')
+#    answer = input("Enter your choice here: ")
+#    if answer.lower() == 'y':
+#        while stillHaveQuestions == True:
+#            showDashboardLights()
+#            answer = int(input("Enter your choice here: "))
+#            # show the result of the input choice
+#            print(warningLights(answer))
+#            print()
+#            print(
+#                'Do you still want to ask about the different lights in your dashboard? [Y] | [N]')
+#            answer = input("Enter your choice here: ")
+#            if answer.lower() == 'n':
+#                stillHaveQuestions = False
+#    elif answer.lower() == 'n':
+#        while stillHaveQuestions == True:
+#            showCarProblems()
+#            answer = int(input("Enter your choice here: "))
+#            print(carProblem(answer))
+#            print("TO DO LIST:")
+#            print(carToDo(answer))
+#            print()
+#            print(
+#                'Does your car have other problems besides what you have just searched? [Y] | [N]')
+#            answer = input("Enter your choice here: ")
+#            if answer.lower() == 'n':
+#                stillHaveQuestions = False
 
 # main program starts here
 
-print('''
-        Hello! This is <insert system name here>, your expert system for your needs. Although
-        I am still a new recruit, so I do not know very much about cars unlike you humans do.
-        Never fret, though! My creators have shown me some common problems you humans have 
-        with cars. 
-
-        I am going to ask you some questions and based from your answers, I will suggest possible 
-        solutions to your problem. 
-
-        Now, is your problem related to your petrol or your diesel?
-
-        [1] Petrol
-        [2] Diesel
-      ''')
-
-flag = True
-
-while flag == True:
-    choice = int(input("Enter your choice here: "))
-    if choice == 1 or choice == 2:
-        if choice == 2: isPetrol = False
-        flag = False
-    else:
-        print("Sorry! I don't much about that problem.")
-ask()
-
-print('''
-        I hope I was able to help you in some way! Obviously, I'm not the best person(?)
-        to ask about your problems about cars. I just gave you an idea about what might be the problem
-        so you can ask your mechanic about it. Hopefully you'll be able to consult a real mechanic soon.
-
-        Thank you for consulting my services!
-      ''')
+#print('''
+#        Hello! This is <insert system name here>, your expert system for your needs. Although
+#        I am still a new recruit, so I do not know very much about cars unlike you humans do.
+#        Never fret, though! My creators have shown me some common problems you humans have 
+#        with cars. 
+#
+#        I am going to ask you some questions and based from your answers, I will suggest possible 
+#        solutions to your problem. 
+#
+#        Now, is your problem related to your petrol or your diesel?
+#
+#        [1] Petrol
+#        [2] Diesel
+#      ''')
+#
+#flag = True
+#
+#while flag == True:
+#    choice = int(input("Enter your choice here: "))
+#    if choice == 1 or choice == 2:
+#        if choice == 2: isPetrol = False
+#        flag = False
+#    else:
+#        print("Sorry! I don't much about that problem.")
+#ask()
+#
+#print('''
+#        I hope I was able to help you in some way! Obviously, I'm not the best person(?)
+#        to ask about your problems about cars. I just gave you an idea about what might be the problem
+#        so you can ask your mechanic about it. Hopefully you'll be able to consult a real mechanic soon.
+#
+#        Thank you for consulting my services!
+#      ''')
+#
