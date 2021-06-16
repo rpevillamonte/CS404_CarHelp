@@ -1,46 +1,6 @@
 knockingScore = 0
 isPetrol = True
 
-def showDashboardLights():
-    print('''
-            [1] Oil Pressure Light
-            [2] Engine Temperature Light
-            [3] ABS Light
-            [4] Handbrake/Parking Brake Light
-            [5] Traction Control Light
-            [6] Engine Warning Light
-            [7] Battery Alert Light
-            [8] Tire Pressure Light
-            [9] Fuel Indicator
-            [10] Air Bag Indicator
-            [11] Seat Belt Indicator
-            [12] Washer Fluid Indicator
-
-            Which of these lights are you seeing on your dashboard? (Type the number of your choice)
-            ''')
-
-def showCarProblems():
-    print(
-            '''
-                [1] Knocking on the engine
-                [2] Steering wheel is shaking when at use
-                [3] Squeaking or grinding noise when braking
-                [4] Steering feels heavy
-                [5] Car does not accelerate, but RPM goes up
-                [6] Car is consuming too much oil
-                [7] Battery is not charging (even if it is a newly replaced battery)
-                [8] Radiator leaking fluid
-                [9] Turning the key and nothing happens
-                [10] Too much smoke from the exhaust pipe
-                [11] When changing gear, it will not engage easily / it will not stay in gear (Note: Applies to Manual Transmission) 
-                [12] Fluid is leaking in the differential part 
-                [13] Grinding noise when steering and difficulty in steering
-                [14] Dropping gas mileage and loss of power 
-                
-                What can you feel/see about your car?
-            '''
-        )
-
 def warningLights(prompt):
     switcher = {
         1: '''
@@ -121,17 +81,9 @@ def warningLights(prompt):
 
 def p_engineKnockToDo(knockingScore):
     if knockingScore == 0:
-        return '''
-                * Have your air/fuel mixture scanned if it is still correct
-                * Have your engine bearings,pistons, crankshaft checked 
-                * Dont rev the engine high at first start
-                '''
+        return {0: 'Have your air/fuel mixture scanned if it is still correct', 1: 'Have your engine bearings,pistons, crankshaft checked', 2: 'Dont rev the engine high at first start'}
     else:
-        return '''
-                * Check and change Sparkplugs if needed
-                * Refuel with recommended octane level
-                * Regularly change your oil
-                '''
+        return {0: 'Check and change Sparkplugs if needed', 1: 'Refuel with recommended octane level', 2: 'Regularly change your oil'}
     
 def p_engineKnock():
     global knockingScore
@@ -196,76 +148,23 @@ def carToDo(prompt):
         if isPetrol:
             return p_engineKnockToDo(knockingScore)
         else:
-            return '''
-                    * Have your air/fuel mixture scanned if it is still correct
-                    * Have your engine bearings,pistons, crankshaft checked 
-                    * Dont rev the engine high at first start
-               '''
+            return {0: 'Have your air/fuel mixture scanned if it is still correct', 1: 'Have your engine bearings,pistons, crankshaft checked', 2: 'Dont rev the engine high at first start'}
     else:
         switcher = {
-            2: '''
-                * Fill your tires with proper tire pressure.
-                * Do wheel balancing and alignment 
-                * Check balljoints 
-            ''',
-            3: '''
-                * Check brake fluid level
-                * Change brake pads (Also brake rotors if necessary) 
-            ''',
-            4: '''
-                * Check for tire damages
-                * Check steering fluid condition
-                * Flush and replace steering fluid if dirty
-            ''',
-            5: '''
-                * Check the clutch components
-                * Replace the clutch set if already worned out
-                * Avoid pressing clutch for too long
-            ''',
-            6: '''
-                * Check for any oil leaks
-                * Change your oil regularly every 5,000 - 10,000 km
-                * Use the recommended oil viscosity and level
-            ''',
-            7: '''
-                * Have your alternator checked if it can be fixed or must be replaced
-                * Have voltmeter for monitoring the charging status of battery
-            ''',
-            8: '''
-                * Check of the fluid is the same with your antifreeze coolant
-                * If radiator is broken, replace it with the original one from your manufacturer
-            ''',
-            9: '''
-                * Have your starter motor checked 
-                * Test it 5-10 times after being fixed 
-            ''',
-            10: '''
-                * Check for any damage on the exhaust system
-                * Have your air/fuel mixture checked using scan tool
-                * Regularly change your oil every 5,000 - 10,000km
-            ''',
-            11: '''
-                * Check clutch first if there is any wear or damage
-                * If clutch is not the problem, you need to let them check your transmission or gearbox for damage
-                * Change transmission fluid every 35,000 to 45,000 km
-            ''',
-            12: '''
-                * Check if the fluid is really your transmission fluid
-                * If the hole exist, have it fixed immidiately and change new transmission fluid 
-                * Regularly clean your underchassis and check for cracks or leaks
-            ''',
-            13: '''
-                * Check if there is any damage on tires
-                * Check steering fluid if for any leaks.
-                * Have your steering rack checked for any damage
-            ''',
-            14: '''
-                * Check air filter and air filter box for any clogging
-                * Replace air filter and cabin filter with original one from manufacturer if needed
-                * Replace air filter every after 25,000 to 30,000 km 
-            '''
+            2: {0: 'Fill your tires with proper tire pressure.', 1: 'Do wheel balancing and alignment', 2: 'Check balljoints'},
+            3: {0: 'Check brake fluid level', 1: 'Change brake pads (Also brake rotors if necessary)'},
+            4: {0: 'Check for tire damages', 1: 'Check steering fluid condition', 2: 'Flush and replace steering fluid if dirty'},
+            5: {0: 'Check the clutch components', 1: 'Replace the clutch set if already worned out', 2: 'Avoid pressing clutch for too long'},
+            6: {0: 'Check for any oil leaks', 1: 'Change your oil regularly every 5,000 - 10,000 km', 2: 'Use the recommended oil viscosity and level'},
+            7: {0: 'Have your alternator checked if it can be fixed or must be replaced', 1: 'Have voltmeter for monitoring the charging status of battery'},
+            8: {0: 'Check of the fluid is the same with your antifreeze coolant', 1: 'If radiator is broken, replace it with the original one from your manufacturer'},
+            9: {0: 'Have your starter motor checked', 1: 'Test it 5-10 times after being fixed'},
+            10: {0: 'Check for any damage on the exhaust system', 1: 'Have your air/fuel mixture checked using scan tool', 2: 'Regularly change your oil every 5,000 - 10,000km'},
+            11: {0: 'Check clutch first if there is any wear or damage', 1: 'If clutch is not the problem, you need to let them check your transmission or gearbox for damage', 2: 'Change transmission fluid every 35,000 to 45,000 km'},
+            12: {0: 'Check if the fluid is really your transmission fluid', 1: 'If the hole exist, have it fixed immidiately and change new transmission fluid', 2: 'Regularly clean your underchassis and check for cracks or leaks'},
+            13: {0: 'Check if there is any damage on tires', 1: 'Check steering fluid if for any leaks.', 2: 'Have your steering rack checked for any damage'},
+            14: {0: 'Check air filter and air filter box for any clogging', 1: 'Replace air filter and cabin filter with original one from manufacturer if needed', 2: 'Replace air filter every after 25,000 to 30,000 km'}
         }
-    knockingScore = 0
     return switcher.get(prompt, 'Can\'t provide a solution for this. Maybe choose another one?')
 
 def carProblem(prompt):
@@ -410,75 +309,3 @@ def solution(is_petrol, light_check, exp_index, knocking_score=0):
         return {'problem_solution' : carProblem(exp_index),
                 'to_do' : carToDo(exp_index)
                 }
-    
-# q/a portion for petrol problems
-
-#def ask():
-#    stillHaveQuestions = True
-#    print('''
-#            Are there any warning lights on your dashboard?
-#            [Y]es | [N]o
-#            ''')
-#    answer = input("Enter your choice here: ")
-#    if answer.lower() == 'y':
-#        while stillHaveQuestions == True:
-#            showDashboardLights()
-#            answer = int(input("Enter your choice here: "))
-#            # show the result of the input choice
-#            print(warningLights(answer))
-#            print()
-#            print(
-#                'Do you still want to ask about the different lights in your dashboard? [Y] | [N]')
-#            answer = input("Enter your choice here: ")
-#            if answer.lower() == 'n':
-#                stillHaveQuestions = False
-#    elif answer.lower() == 'n':
-#        while stillHaveQuestions == True:
-#            showCarProblems()
-#            answer = int(input("Enter your choice here: "))
-#            print(carProblem(answer))
-#            print("TO DO LIST:")
-#            print(carToDo(answer))
-#            print()
-#            print(
-#                'Does your car have other problems besides what you have just searched? [Y] | [N]')
-#            answer = input("Enter your choice here: ")
-#            if answer.lower() == 'n':
-#                stillHaveQuestions = False
-
-# main program starts here
-
-#print('''
-#        Hello! This is <insert system name here>, your expert system for your needs. Although
-#        I am still a new recruit, so I do not know very much about cars unlike you humans do.
-#        Never fret, though! My creators have shown me some common problems you humans have 
-#        with cars. 
-#
-#        I am going to ask you some questions and based from your answers, I will suggest possible 
-#        solutions to your problem. 
-#
-#        Now, is your problem related to your petrol or your diesel?
-#
-#        [1] Petrol
-#        [2] Diesel
-#      ''')
-#
-#flag = True
-#
-#while flag == True:
-#    choice = int(input("Enter your choice here: "))
-#    if choice == 1 or choice == 2:
-#        if choice == 2: isPetrol = False
-#        flag = False
-#    else:
-#        print("Sorry! I don't much about that problem.")
-#ask()
-#
-#print('''
-#        I hope I was able to help you in some way! Obviously, I'm not the best person(?)
-#        to ask about your problems about cars. I just gave you an idea about what might be the problem
-#        so you can ask your mechanic about it. Hopefully you'll be able to consult a real mechanic soon.
-#
-#        Thank you for consulting my services!
-#      ''')
-#
