@@ -1,13 +1,13 @@
 {% extends 'sitetemplate.html' %}
 {% block title %}
-    Hire me - Brand
+    Car Expert - Car Aid
 {% endblock %}
 {% block main %}
 <main class="page hire-me-page">
     <section class="portfolio-block hire-me">
         <div class="container">
             <div class="heading">
-                <h2>Welcome to CarHelp!</h2>
+                <h2>Welcome to Car Expert!</h2>
             </div>
             <form id="carform">
                 <div>
@@ -22,7 +22,7 @@
                             <label class="form-label custom-control-label diesel-petrol" for="customRadio2">&nbsp; Diesel</label>
                         </div>
                     </fieldset>
-                    <fieldset id="nextDiv" style="display: none;">
+                    <fieldset id="nextDiv" style="display: none">
                         <legend>Are there any warning lights on your dashboard?</legend>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline1" value="0" class="" name="warning">
@@ -33,7 +33,7 @@
                             <label class="form-label custom-control-label" for="customRadioInline2">&nbsp; NO</label>
                         </div>
                     </fieldset>
-                    <div id="lights" style="display: none;">
+                    <div id="lights" style="display: none">
                         <fieldset>
                             <legend>Which of these lights are you seeing on your dashboard?</legend>
                             {% for light in lights %}
@@ -44,7 +44,7 @@
                             {% endfor %}
                         </fieldset>
                     </div>
-                    <div id="problems" style="display: none;">
+                    <div id="problems" style="display: none">
                         <fieldset>
                             <legend>What can you feel/see about your car?</legend>
                             {% for problem in problems %}
@@ -55,18 +55,10 @@
                             {% endfor %}
                         </fieldset>
                     </div>
-                    <div id="solution_set" style="display: none">
-                        <fieldset id="l_solution_set" style="display:none">
-                            <legend>Solution:&nbsp; <span></span> </legend>
-                            <p style="background: rgb(208,238,255);padding: 10px;text-align: justify;" id="solution"></p>
-                        </fieldset>
-                        <fieldset id="p_solution_set" style="display:none">
-                            <legend>Solution:&nbsp; <span></span> </legend>
-                            <p style="background: rgb(208,238,255);padding: 10px;text-align: justify;" id="solution"></p>
-                            <legend>What To Do:&nbsp; <span></span> </legend>
-                            <ul style="background: rgb(208,238,255);padding: 10px;text-align: justify;" id="todo"></ul>
-                        </fieldset>
-                    </div>
+                    <fieldset id="solution_set" style="display:none">
+                        <legend>Solution:&nbsp; <span></span> </legend>
+                        <p style="background: rgb(208,238,255);padding: 15px;text-align: justify;" id="solution"></p>
+                    </fieldset>
                     <center>
                         <button type="button" id="solveButton" class="btn btn-primary" style="display: none;">Solve My Problem!</button>
                     </center>
@@ -77,69 +69,47 @@
 </main>
 {% endblock %}
 
-{% block js %} 
+{% block js %}
 
 <script type="text/javascript">
     $(document).ready(function() {
         $("input[name='pet-dies']").click(function() {
-            $("#nextDiv").show();
+            $("#nextDiv").css('display', 'block');
         });
 
         $("input[name='warning']").click(function() {
             var choice = $(this).val();
             if(choice == 0) {
-                $("#lights").show();
-                $("input[name='problemRadio']:checked").prop('checked', false);
-                $("#problems").hide();
+                $("#lights").css('display', 'block');
+                $("#problems").css('display', 'none');
             } else {
-                $("#lights").hide();
-                $("input[name='lightRadio']:checked").prop('checked', false);
-                $("#problems").show();
+                $("#lights").css('display', 'none');
+                $("#problems").css('display', 'block');
             }
-            $("#solution_set").hide();
-            $("#solveButton").hide();
         });
 
-        $("input[name='lightRadio'], input[name='problemRadio']").click(function() {
+        $("input[name='lightRadio']").click(function() {
             var choice = $(this).val();
-            $("#solution_set").hide();
             if(choice != 1) {
-                $("#solveButton").show();
+                $("#solveButton").css('display', 'block');
             } else {
-                $("#solveButton").hide();
+                $("#solveButton").css('display', 'none');
             }
         });
-
-        //$("input[name='problemRadio']").click
 
         $("#carform").submit(function (e) {
-            var problemKey = ($("input[name='warning']:checked").val() == 0) ? $("input[name='lightRadio']:checked").val() : $("input[name='problemRadio']:checked").val();
+            console.log($("input[name='pet-dies']:checked").val());
             $.ajax({
                 data: {
                     petrol_check : $("input[name='pet-dies']:checked").val(),
                     light_check : $("input[name='warning']:checked").val(),
-                    problem : problemKey
+                    problem : $("input[name='lightRadio']:checked").val()
                 },
                 type: 'POST',
                 url: '/solution'
             }).done(function(response) {
-                let solution = response.solution;
-                $("#solution_set").show();
-                if(solution.light_solution) {
-                    var l_solution = $("#l_solution_set");
-                    l_solution.css('display', 'block');
-                    l_solution.find("#solution").text(response.solution.light_solution);   
-                } else {
-                    var p_solution = $("#p_solution_set");
-                    p_solution.css('display', 'block');
-                    p_solution.find("#solution").text(response.solution.problem_solution);
-                    var todo = response.solution.to_do;
-                    let size = Object.keys(todo).length;
-                    var list = $("#todo");
-                    for(let i=0; i<size; i++) {
-                        list.append(`<li>${todo[i]}</li>`);
-                    }
-                }
+                $("#solution_set").css('display', 'block');
+                $("#solution").text(response.solution.light_solution);
             });
 
             e.preventDefault();
@@ -153,4 +123,3 @@
 </script>
 
 {% endblock %}
-

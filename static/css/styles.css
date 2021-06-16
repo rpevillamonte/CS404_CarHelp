@@ -1,0 +1,16 @@
+*{
+  font-family: 'Poppins';
+}
+
+fieldset{
+  margin: 10px;
+  border-bottom: 1px solid var(--bs-gray) ;
+}
+
+legend{
+  padding: 8px 0px;
+}
+
+.custom-control .custom-radio{
+  padding: 8px 0px;
+}
