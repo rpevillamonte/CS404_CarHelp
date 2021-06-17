@@ -10,7 +10,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('index.html')    
+    return render_template('index.html')
 
 @app.route('/about-us')
 def about_us():
@@ -18,9 +18,9 @@ def about_us():
 
 @app.route('/carhelp')
 def car_help():
-    lights = ['Oil Pressure Light', 'Engine Temperature Light', 
-              'ABS Light', 'Handbrake/Parking Brake Light', 'Traction Control Light', 
-              'Engine Warning Light', 'Battery Alert Light', 'Tire Pressure Light', 
+    lights = ['Oil Pressure Light', 'Engine Temperature Light',
+              'ABS Light', 'Handbrake/Parking Brake Light', 'Traction Control Light',
+              'Engine Warning Light', 'Battery Alert Light', 'Tire Pressure Light',
               'Fuel Indicator', 'Air Bag Indicator', 'Seat Belt Indicator', 'Washer Fluid Indicator']
     problems = ['Knocking on the engine', 'Steering wheel is shaking when at use', 'Squeaking or grinding noise when braking',
                 'Steering feels heavy', 'Car does not accelerate, but RPM goes up', 'Car is consuming too much oil',
@@ -30,15 +30,16 @@ def car_help():
                 'Dropping gas mileage and loss of power']
     return render_template('carhelp.html', lights=lights, problems=problems)
 
-#problem-choice: petrol or diesel 
+#problem-choice: petrol or diesel
 @app.route('/solution', methods=['POST'])
 def solve():
-    
+
     is_petrol = int(request.form['petrol_check'])
     light_check = int(request.form['light_check'])
     exp_index = int(request.form['problem'])
-    
-    car_solution = solution(is_petrol, light_check, exp_index)
+    knocking_score = request.form['knocking_score']
+
+    car_solution = solution(is_petrol, light_check, exp_index, knocking_score)
     return jsonify({'solution' : car_solution})
 
 @app.route('/understand-cars')

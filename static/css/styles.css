@@ -11,6 +11,27 @@ legend{
   padding: 8px 0px;
 }
 
-.custom-control .custom-radio{
+.container{
+  padding: 0px;
+}
+
+.row{
+  width: 100%;
+  margin: 0px;
   padding: 8px 0px;
+}
+
+.col-1 .align-self-center{
+  padding: 0px;
+  text-align: center;
+}
+
+.col{
+  padding: 0px;
+}
+
+.col-form-label .custom-control-label{
+  padding: 0px 8px;
+  width: 100%;
+  margin: 0px;
 }
