@@ -1,4 +1,3 @@
-knockingScore = 0
 isPetrol = True
 
 def warningLights(prompt):
@@ -120,8 +119,7 @@ def p_engineKnock(knockingScore):
                 but the risk of having knocks will be decreased.
                 '''
 
-def carToDo(prompt):
-    global knockingScore
+def carToDo(prompt, knockingScore):
     global isPetrol
     if prompt == 1:
         if isPetrol:
@@ -286,5 +284,5 @@ def solution(is_petrol, light_check, exp_index, knockingScore):
         return {'light_solution' : warningLights(exp_index)}
     else:
         return {'problem_solution' : carProblem(exp_index, knockingScore),
-                'to_do' : carToDo(exp_index)
+                'to_do' : carToDo(exp_index, knockingScore)
                 }

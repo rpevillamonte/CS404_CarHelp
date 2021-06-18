@@ -47,7 +47,7 @@ def solve():
     is_petrol = int(request.form['petrol_check'])
     light_check = int(request.form['light_check'])
     exp_index = int(request.form['problem'])
-    knocking_score = request.form['knocking_score']
+    knocking_score = int(request.form['knocking_score'])
 
     car_solution = solution(is_petrol, light_check, exp_index, knocking_score)
     return jsonify({'solution' : car_solution})

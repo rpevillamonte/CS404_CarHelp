@@ -45,10 +45,11 @@
                         <fieldset>
                             <legend>Which of these lights are you seeing on your dashboard?</legend>
                             {% for light in lights %}
-                            <div class="row" style="padding:5px 0px">
-                                <div class="col-1 align-self-center"><input type="radio" id="customRadioInline1" class="custom-control-input light-choice" value="{{ loop.index }}" name="lightRadio"/></div>
-                                <div class="col align-self-center"><label class="col-form-label custom-control-label" for="customRadioInline1">{{ light[0] }}</label></div>
-                                <div class="col-lg-2" style="padding: 0px;"><img style="width: 100%;" src="{{ url_for('static', filename=light[1]) }}" /></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-1 align-self-center"><input type="radio" id="customRadioInline1" class="custom-control-input light-choice" value="{{ loop.index }}" name="lightRadio"></div>
+                                    <div class="col"><label class="col-form-label custom-control-label" for="customRadioInline1">{{ light }}</label></div>
+                                </div>
                             </div>
                             {% endfor %}
                         </fieldset>
@@ -154,26 +155,15 @@
             $(".to-do-opt").empty();
         }
 
-        $.resetChoice = function() {
-          $("#engineKnock1").css('display', 'none');
-          $("#engineKnock2").css('display', 'none');
-          $("#engineKnock3").css('display', 'none');
-        }
-
         $("input[name='pet-dies']").click(function() {
             $("#nextDiv").css('display', 'block');
             $.resetSolution();
-            var choice = $(this).val();
-            if(choice == 1){
-              $.resetChoice();
-            }
         });
 
         $("input[name='warning']").click(function() {
             $.resetSolution();
             var choice = $(this).val();
             if(choice == 0) {
-                $.resetChoice();
                 $("#lights").css('display', 'block');
                 $("#problems").css('display', 'none');
             } else {
@@ -201,7 +191,9 @@
                   $("#engineKnock1").css('display', 'block');
               } else if(choice != 1){
                   $("#solveButton").css('display', 'block');
-                  $.resetChoice();
+                  $("#engineKnock1").css('display', 'none');
+                  $("#engineKnock2").css('display', 'none');
+                  $("#engineKnock3").css('display', 'none');
               } else{
                   $("#solveButton").css('display', 'none');
               }
